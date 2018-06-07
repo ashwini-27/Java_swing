@@ -13,14 +13,21 @@
 </ion-header>
 
 
-<ion-content padding>
-<!--    <ion-card *ngFor="let item of items | async">
-        username:{{item.username | json}}
-        message:{{item.message | json}}
-      </ion-card>
-    -->
+<ion-content padding class="borderless">
+  <ion-item *ngFor="let item of item3 " style="margin-bottom: 15px;">
+      <ion-item class={{item.flt}}>
+    <p >
+          {{item.username}}
+    </p>
+    <span>
+              message:{{item.message | json}}
+    </span>
+    </ion-item>
+    
+  </ion-item>
 
-    <ul>
+<p>hello</p>
+  <!--  <ul>
         <li >
            {{ item1 |json }}
 
@@ -30,7 +37,7 @@
             <p>{{ item1?.message }}</p>
         
         </li>
-      </ul>
+      </ul>-->
   <!--    <h1> name:{{item1.username}}</h1>
     
       <h1> message:{{item1.message}}</h1>

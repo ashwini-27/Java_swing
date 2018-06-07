@@ -1,3 +1,20 @@
 page-chatgroup {
 
+.me{
+    background-color: aqua;
+    float: right;
+
+}
+.others{
+    background-color:floralwhite;
+    float: left;
+    
+}
+.others .item-inner{
+    border-bottom: inherit !important;
+}
+.borderless .item-inner{
+    border-bottom: inherit !important;
+    
+}
 }
