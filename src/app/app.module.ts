@@ -5,20 +5,28 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {Facebook} from '@ionic-native/facebook'
+
+import firebase from 'firebase';
+
+import { AngularFireAuthModule } from 'angularfire2/auth';
+//import { AuthProvider } from '../providers/auth-provider';
+
+
+
+
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Firebase } from '@ionic-native/firebase';
 import {AngularFireModule} from 'angularfire2'
 const config = {
-  apiKey: "AIzaSyACS_aAdBuU2IUZrpS9qzoCiIEpevMYwJ4",
-  authDomain: "chat-2793a.firebaseapp.com",
-  databaseURL: "https://chat-2793a.firebaseio.com",
-  projectId: "chat-2793a",
-  storageBucket: "chat-2793a.appspot.com",
-  messagingSenderId: "1078483615596"
+  apiKey:"AIzaSyACS_aAdBuU2IUZrpS9qzoCiIEpevMYwJ4",
+  authDomain:"chat-2793a.firebaseapp.com",
+  databaseURL:"https://chat-2793a.firebaseio.com",
+  projectId:"chat-2793a",
+  storageBucket:"chat-2793a.appspot.com",
+  messagingSenderId:"1078483615596"
 };
-
-
 import {ChatgroupPage} from '../pages/chatgroup/chatgroup';
 @NgModule({
   declarations: [
@@ -28,7 +36,9 @@ import {ChatgroupPage} from '../pages/chatgroup/chatgroup';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(config),AngularFireDatabaseModule
+    AngularFireModule.initializeApp(config),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

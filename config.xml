@@ -21,6 +21,9 @@
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <access origin="*" />
+        <allow-navigation href="*" />
+        <allow-intent href="*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
@@ -87,4 +90,5 @@
         <variable name="ANDROID_SDK_VERSION" value="4.+" />
     </plugin>
     <plugin name="cordova-plugin-firebase" spec="^1.0.5" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
 </widget>
