@@ -17,7 +17,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,public facebook:Facebook,public af:AngularFireAuth) {
     
   }
-  
+ user;
 
 
   
@@ -72,14 +72,17 @@ Login(){
 
     return this.facebook.login(['email'])
       .then( response => {
-        alert(response);
+    //    alert(response);
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-  alert('facebook credential'+facebookCredential);
+  //alert('facebook credential'+facebookCredential);
 
 
         this.af.auth.signInWithCredential(facebookCredential)
           .then( success => { 
-            alert("Firebase success: " + JSON.stringify(success)); 
+            
+            
+            alert("Firebase success: " + JSON.stringify(success));
+            this.user=success;
           }).catch(err=>{
             alert(JSON.stringify(err));
           });
