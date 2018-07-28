@@ -4,85 +4,53 @@ import {ChatgroupPage} from '../chatgroup/chatgroup';
 import {Facebook} from '@ionic-native/facebook';
 import * as  firebase from 'firebase';
 import { AngularFireAuth } from 'angularfire2/auth';
-//import { AngularFireAuthModule } from 'angularfire2/auth';
+import {parentuser} from '../home/ParentUser'
+import {AngularFireDatabase} from 'angularfire2/database';
 import { auth } from 'firebase/app';
+import { jsonEval } from '@firebase/util';
+import { JsonPipe } from '@angular/common';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+ userauth;
   username="";
   passcode=null;
   mobile=null;
-  constructor(public navCtrl: NavController,public facebook:Facebook,public af:AngularFireAuth) {
-    
+  constructor(public navCtrl: NavController,public facebook:Facebook,public af:AngularFireAuth,public db:AngularFireDatabase) {
+       
   }
  user;
-
-
-  
-  
-  /*
-  {
-    return this.fb.login(['email', 'public_profile']).then(res =>{
-    const facebookCredential = firebase.auth.FacebookAuthProvider.credential
-    (res.authResponse.accessToken);
-    this.af.app.auth().signInWithCredential(facebookCredential).then(()=>{
-    observer.next();
-    }).catch(error => {
-    //console.log(error);
-    observer.error(error);
-    });
-    });
-    }*/
-
-
-/*
-
-Login(){
-    this.af.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-   .then(res => {
-   })
-   }
-  */ 
-
-
- /*Login(): Promise<any> {
-  return this.facebook.login(['email'])
-    .then( response => {
-      const facebookCredential = firebase.auth.FacebookAuthProvider
-        .credential(response.authResponse.accessToken);
-
-      firebase.auth().signInWithCredential(facebookCredential)
-        .then( success => { 
-          console.log("Firebase success: " + JSON.stringify(success)); 
-        });
-
-    }).catch((error) => { console.log(error) });
-}*/
-
-
-
-
-
+oauth;
+ionViewDidLoad() {
+  this.af.authState.subscribe(use => {
+    this.oauth=use;
+    if (use) {
+     // alert('authstate'+JSON.stringify(use));
+      
+    this.navCtrl.push(ChatgroupPage);
+    //this.next();
+    }
+  });
+}
 
   Login(): Promise<any> {
-
-
-
     return this.facebook.login(['email'])
       .then( response => {
-    //    alert(response);
         const facebookCredential = firebase.auth.FacebookAuthProvider.credential(response.authResponse.accessToken);
-  //alert('facebook credential'+facebookCredential);
-
-
         this.af.auth.signInWithCredential(facebookCredential)
           .then( success => { 
-            
-            
-            alert("Firebase success: " + JSON.stringify(success));
+            parentuser.username=this.user.displayName;
+            parentuser.imgurl=this.user.photoURL;
+            alert('parent user:::'+parentuser.username+'\nimage url'+parentuser.imgurl);
+            alert("Firebase success:\n object one " + JSON.stringify(success));
             this.user=success;
+            if(this.user.lastLoginAt==this.user.createdAt){
+                this.adduser();
+            }
+                this.navCtrl.push(ChatgroupPage);
+
           }).catch(err=>{
             alert(JSON.stringify(err));
           });
@@ -91,19 +59,22 @@ Login(){
   }
 Logout()
   {
-    this.facebook.logout();
+    this.af.auth.signOut().then(res=>{
+      alert('logged out succesfully')
+    });
   }
   next(){
-    //alert('clicked on next');
 
-    if(/^[a-zA-Z0-9]+$/.test(this.username)&&(this.mobile.length==10)){
-      //alert('user accecpatable');
-      this.navCtrl.push(ChatgroupPage,{username:this.username});
-    }
-    else{
-      alert('user unacceptabe');
-    }
+      alert(JSON.stringify(this.oauth));
+        }
 
+  adduser(){
+    this.db.list('/users').push({
+      id:this.user.uid,
+      profile:this.user
+}).then(res=>{
+alert('user added into the users table\n'+res);
+});
   }
   
       }

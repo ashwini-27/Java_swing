@@ -15,7 +15,6 @@
   <ion-item>
     <ion-label floating>Username</ion-label>
     <ion-input type="text" [(ngModel)]="username"></ion-input>
-    <h5>{{username}}</h5>
   </ion-item>
 
   <ion-item>
@@ -28,7 +27,7 @@
     <ion-input type="mobile" [(ngModel)]="mobile"></ion-input>
   </ion-item>
   <ion-item>
-    <button ion-button (click)="next()" block>next</button>
+    <button ion-button (click)="next()" block>check auth status</button>
   </ion-item>
 
 </ion-list>
