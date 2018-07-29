@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {Facebook} from '@ionic-native/facebook'
-
+import { IonicStorageModule } from '@ionic/storage';
 import firebase from 'firebase';
 
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -13,7 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 
-
+import {FirstPage} from '../pages/first/first'
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -31,11 +31,12 @@ import {ChatgroupPage} from '../pages/chatgroup/chatgroup';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,ChatgroupPage
+    HomePage,ChatgroupPage,FirstPage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AngularFireModule.initializeApp(config),
     AngularFireDatabaseModule,
     AngularFireAuthModule
@@ -43,7 +44,7 @@ import {ChatgroupPage} from '../pages/chatgroup/chatgroup';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,ChatgroupPage
+    HomePage,ChatgroupPage,FirstPage
   ],
   providers: [
     StatusBar,Facebook,

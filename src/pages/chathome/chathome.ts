@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {AngularFireDatabase} from 'angularfire2/database';
-import { userobj } from '../chatgroup/userobj';
+import { user } from '../allusers/userobj';
 /**
  * Generated class for the ChathomePage page.
  *
@@ -18,7 +18,7 @@ export class ChathomePage {
   userslist;
   uidself;
   uidsecond;
-  users:Array<userobj>=[];
+  users:Array<user>=[];
   constructor(public navCtrl: NavController, public navParams: NavParams,public af:AngularFireDatabase) {
 
 
@@ -27,11 +27,12 @@ export class ChathomePage {
   af.list('users').valueChanges().subscribe(res=>{
      
     this.userslist=res;
+    this.users=[];
     for(var j in this.userslist){
      //var sub_key = j;
      var sub_val = this.userslist[j];
      //console.log(sub_val);
-     this.users.push(new userobj(sub_val.profile.displayName,sub_val.profile));
+     this.users.push(sub_val);
    }
    
     });

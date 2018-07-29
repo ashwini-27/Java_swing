@@ -1,0 +1,18 @@
+
+<ion-header>
+
+  <ion-navbar>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="card" *ngFor="let user of users" onclick="userchat(user)">
+    <ion-img src=user.imgurl></ion-img>
+    <b>{{user.username}}</b>
+  </div>
+
+  <ion-title>{{username}}</ion-title>
+  <ion-img src={{imgurl}}></ion-img>
+</ion-content>

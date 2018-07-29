@@ -12,7 +12,7 @@
           {{item.username}}
     </p>
     <span>
-              message:{{item.message | json}}
+              {{item.message }}
     </span>
     </ion-item>
     
@@ -21,8 +21,11 @@
 </ion-content>
 
 <ion-footer>
-    <ion-toolbar>
-      <ion-input type="text" [(ngModel)]="message"></ion-input>
-      <button ion-button icon-only (click)="sendmsg()"><ion-icon name="send"></ion-icon></button>
-    </ion-toolbar>
+    <ion-row>
+  <ion-col col-10><ion-textarea rows="1" id="messageInputBox" placeholder="Send message" (input)="change()" required></ion-textarea></ion-col >
+<ion-col col-1>
+<button ion-button icon-only (click)="sendmsg()" ><ion-icon name="send"></ion-icon></button>
+</ion-col>
+</ion-row>
+
 </ion-footer>
